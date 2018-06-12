@@ -202,17 +202,6 @@ public class PasswordResourceTest extends AbstractAppTest {
 	}
 
 	@Test
-	public void requestRecoveryLocked() {
-		final PasswordResource resource = newResource();
-		final UserOrg lockedUser = mockUser(resource, "fdaugan");
-		Mockito.when(lockedUser.getLocked()).thenReturn(new Date());
-		resource.requestRecovery("fdaugan", "f.d@sample.com");
-		Assertions.assertEquals(0, repository.findAll().size());
-		Mockito.verify(lockedUser).getLocked();
-		Mockito.verifyNoMoreInteractions(lockedUser);
-	}
-
-	@Test
 	public void sendMailReset() throws MessagingException {
 		final PasswordResource resource = newResource();
 		final UserOrg user = new UserOrg();
